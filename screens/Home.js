@@ -11,6 +11,8 @@ import {
 
 import {FONTS, COLORS, SIZES, icons, images, dummyData } from "../constants";
 
+import { CategoryCard } from "../components";
+
 const Home = ({ navigation }) => {
     return (
         <SafeAreaView 
@@ -35,11 +37,26 @@ const Home = ({ navigation }) => {
 
             renderItem={({item}) => {
                 return (
-                    <View>
+                   <CategoryCard 
 
-                    </View>
+                    containerStyle={{
+                        marginHorizontal: SIZES.padding
+                    }}
+                    categoryItem={item}
+                    onPress={() => navigation.navigate ("Recipe", )}
+                   
+                   />
                 )
             }}
+
+            ListFooterComponent={
+                <View 
+                style={{
+                    marginBottom: 100
+                }}>
+
+                </View>
+            }
         
         />
 
