@@ -11,7 +11,7 @@ import {
 
 import {FONTS, COLORS, SIZES, icons, images, dummyData } from "../constants";
 
-import { CategoryCard } from "../components";
+import { CategoryCard, TrendingCard } from "../components";
 
 const Home = ({ navigation }) => {
 
@@ -152,14 +152,75 @@ function renderSeeRecipeCard() {
                     width: "70%",
                     ...FONTS.body4
                 }}
-                >You have 12 recipes that you haven't tried
+                >
+                    You have 12 recipes that you haven't tried
                 </Text>
-            </View>
 
+                <TouchableOpacity 
+                style={{
+                    marginTop: 10,
+                }}
+
+                onPress={()=> console.log("See Recipes")}
+                
+                >
+                    <Text
+                    style={{
+                        color: COLORS.darkGreen,
+                        textDecorationLine: 'underline',
+                        ...FONTS.h4
+                    }}
+                    
+                    >
+                        See Recipes
+                    </Text>
+                </TouchableOpacity>
+            </View>
+            
+            
+        </View>
+    )
+}
+
+function renderTrendingSection() {
+
+    return(
+        <View 
+        style={{
+            marginTop: SIZES.padding,
+
+        }}
+        >
+            <Text 
+            style={{
+                marginHorizontal: SIZES.padding,
+                ...FONTS.h2
+            }}
+            >
+                Trending Recipe
+            </Text>
+
+            <FlatList
+            data={dummyData.trendingRecipes}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            keyExtractor={item => `${item.id}`}
+            renderItem={({item, index}) => {
+                return (
+                    <TrendingCard
+                    
+                    recipeItem={item}
+                    
+                    />
+                )
+            }}
+            
+            />
 
         </View>
     )
 }
+
 
     return (
         <SafeAreaView 
@@ -169,6 +230,7 @@ function renderSeeRecipeCard() {
         }}
         
         > 
+        
 
         <FlatList
         
@@ -187,6 +249,7 @@ function renderSeeRecipeCard() {
                     {/* See Recipe Card */}
                     {renderSeeRecipeCard()}
                     {/* Trending Section */}
+                    {renderTrendingSection()}
                     {/* Category Header */}
                 </View>
             }
@@ -199,7 +262,7 @@ function renderSeeRecipeCard() {
                         marginHorizontal: SIZES.padding
                     }}
                     categoryItem={item}
-                    onPress={() => navigation.navigate ("Recipe", )}
+                    onPress={() => navigation.navigate ("Recipe", {recipe: item} )}
                    
                    />
                 )
