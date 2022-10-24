@@ -1,10 +1,33 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import {
     View,
-    Text
+    Text,
+    Image,
+    TouchableOpacity,
+    Animated,
+    Platform 
 } from 'react-native';
 
-const Recipe = () => {
+import { BlurView } from "@react-native-community/blur";
+
+import { SIZES, FONTS, COLORS, icons } from "../constants";
+
+const HEADER_HEIGHT = 350;
+
+const Recipe = ({navigation, route}) => {
+
+
+     const[selectedRecipe, setSelectedRecipe] = React.useState(null)
+
+     React.useEffect (()=> {
+
+        let {recipe} =route.params
+
+        setSelectedRecipe(recipe)
+
+
+     }, [] )
+
     return (
         <View
             style={{

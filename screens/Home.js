@@ -209,8 +209,11 @@ function renderTrendingSection() {
                 return (
                     <TrendingCard
                     
+                    containerStyle={{
+                        marginLeft: index == 0 ? SIZES.padding : 0
+                    }}
                     recipeItem={item}
-                    
+                    onPress={() => navigation.navigate("Recipe", { recipe: item})}
                     />
                 )
             }}
@@ -221,6 +224,41 @@ function renderTrendingSection() {
     )
 }
 
+function renderCategoryHeader() {
+    return(
+        <View
+        
+        style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            marginTop: 20,
+            marginHorizontal: SIZES.padding
+
+        }}>
+            {/* Section Title */}
+            <Text 
+            style={{
+                flex: 1,
+                ...FONTS.h2
+            }}
+            >
+                Categories
+            </Text>
+            {/* View All */}
+            <TouchableOpacity
+            >
+            <Text
+            style={{
+                color: COLORS.gray,
+                ...FONTS.body4
+            }}
+            >
+                View all
+            </Text>
+            </TouchableOpacity>
+        </View>
+    )
+}
 
     return (
         <SafeAreaView 
@@ -251,6 +289,7 @@ function renderTrendingSection() {
                     {/* Trending Section */}
                     {renderTrendingSection()}
                     {/* Category Header */}
+                    {renderCategoryHeader()}
                 </View>
             }
 
