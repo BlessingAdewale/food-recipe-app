@@ -280,9 +280,7 @@ function renderCategoryHeader() {
                 <View>
                     {/* Header */}
                     {renderHeader()}
-
                     {/* Search Bar */}
-
                     {renderSearchBar()}
                     {/* See Recipe Card */}
                     {renderSeeRecipeCard()}
