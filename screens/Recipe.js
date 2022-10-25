@@ -10,6 +10,8 @@ import {
 
 import { BlurView } from "@react-native-community/blur";
 
+import { Viewers } from "../components";
+
 import { SIZES, FONTS, COLORS, icons } from "../constants";
 
 const HEADER_HEIGHT = 350;
@@ -350,6 +352,87 @@ function renderRecipeCardHeader() {
     )
 }
 
+function renderRecipeInfo() {
+    return (
+        <View
+        style={{
+            flexDirection: 'row',
+            height: 130,
+            width: SIZES.width,
+            paddingHorizontal: 30,
+            paddingVertical: 20,
+            alignItems: 'center'
+        }}
+        >
+            {/* Recipe  */}
+        <View 
+        style={{
+            flex: 1.5,
+            justifyContent: 'center'
+        }}
+        >
+            <Text style={{
+                ...FONTS.h2
+            }}>
+            {selectedRecipe?.name}
+            </Text>
+
+            <Text
+            style={{
+                marginTop: 5,
+                color: COLORS.lightGray2,
+                ...FONTS.body4
+            }}
+            >
+            {selectedRecipe?.duration} | {selectedRecipe?.serving} Serving
+            </Text>
+        </View>
+
+            {/* Viewers */}
+
+            <View
+            style={{
+                flex: 1,
+                justifyContent: 'center',
+
+            }}
+            >
+            <Viewers
+            viewersList={selectedRecipe?.viewers}
+            
+            />
+            </View>
+
+        </View>
+    )
+}
+
+function renderIngredientHeader() {
+    return (
+        <View
+        style={{
+            flexDirection: 'row',
+            paddingHorizontal: 30,
+            marginTop: SIZES.radius,
+            marginBottom: SIZES.padding
+        }}
+        >
+            <Text
+            style={{
+                flex: 1,
+                ...FONTS.h3
+            }}
+            >
+                Ingredients
+            </Text>
+            <Text>
+
+                {selectedRecipe?.ingredients.length} items
+            </Text>
+        </View>
+    )
+}
+
     return (
         <View
             style={{
@@ -368,8 +451,8 @@ function renderRecipeCardHeader() {
                     {renderRecipeCardHeader()}
                     {/* Info */}
                     {renderRecipeInfo()}
-                    {/* {renderRecipeInfo()} */}
                     {/* Ingredient Title */}
+                    {renderIngredientHeader()}
                 </View>
             }
             scrollEventThrottle={16}
@@ -445,6 +528,17 @@ function renderRecipeCardHeader() {
 
             
             )}
+
+                        ListFooterComponent={
+                            <View
+                            style={{
+                                marginBottom: 100
+                            }}
+                            >
+
+                            </View>
+                        }
+
             />
             {/* Header Bar */}
 
